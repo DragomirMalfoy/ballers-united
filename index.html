@@ -15,7 +15,7 @@
 <style>
 :root{
   --bg:#0b0b0f;--muted:#a8a8b3;--text:#f4f4f7;--gold:#d4af37;--line:#242433;--chip:#1a1a26;
-  --shadow:0 10px 30px rgba(0,0,0,.35);--r:18px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);--r:16px;
   --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
   --brandFont:"Rajdhani","Montserrat",sans-serif;
   --uiFont:"Montserrat","Inter",ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
@@ -24,34 +24,47 @@
 body{margin:0;font-family:var(--uiFont);color:var(--text);background:
   radial-gradient(1200px 800px at 20% -10%, rgba(212,175,55,.18), transparent 55%),
   radial-gradient(900px 600px at 120% 10%, rgba(90,140,255,.12), transparent 55%), var(--bg)}
-header{position:sticky;top:0;z-index:9;background:rgba(11,11,15,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.wrap{max-width:1200px;margin:0 auto;padding:12px 16px}
-.topbar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
-.brand{display:flex;gap:12px;align-items:center}
-.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:var(--gold);font-family:var(--brandFont);font-size:15px;letter-spacing:1px;
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:99;background:rgba(11,11,15,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.wrap{max-width:1200px;margin:0 auto;padding:10px 14px}
+.topbar{display:flex;flex-direction:column;gap:8px}
+@media(min-width:600px){.topbar{flex-direction:row;justify-content:space-between;align-items:center;gap:12px}}
+.brand{display:flex;gap:10px;align-items:center;flex-shrink:0}
+.logo{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:var(--gold);font-family:var(--brandFont);font-size:15px;letter-spacing:1px;
   background:linear-gradient(145deg,rgba(212,175,55,.35),rgba(212,175,55,.10));border:1px solid rgba(212,175,55,.35);box-shadow:var(--shadow)}
-.brand h1{margin:0;font-size:17px;line-height:1.1;font-family:var(--brandFont);letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
-.brand small{display:block;color:var(--muted);font-weight:500;margin-top:2px;font-size:12px;letter-spacing:.3px}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tab{background:transparent;color:var(--muted);border:1px solid var(--line);padding:7px 12px;border-radius:999px;cursor:pointer;font-weight:700;font-family:var(--uiFont);font-size:12px;letter-spacing:.4px;transition:all .15s ease}
+.brand h1{margin:0;font-size:16px;line-height:1.1;font-family:var(--brandFont);letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.brand small{display:block;color:var(--muted);font-weight:500;margin-top:1px;font-size:11px;letter-spacing:.3px}
+
+/* ── TABS: horizontal scroll on mobile ── */
+.tabs{display:flex;gap:5px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;flex-shrink:1;min-width:0}
+.tabs::-webkit-scrollbar{display:none}
+.tab{background:transparent;color:var(--muted);border:1px solid var(--line);padding:6px 11px;border-radius:999px;cursor:pointer;font-weight:700;font-family:var(--uiFont);font-size:11px;letter-spacing:.3px;transition:all .15s ease;white-space:nowrap;flex-shrink:0}
 .tab.active{color:var(--text);border-color:rgba(212,175,55,.65);background:rgba(212,175,55,.16)}
 .tab:hover:not(.active){color:var(--text);border-color:rgba(212,175,55,.3);background:rgba(212,175,55,.06)}
-main{padding:16px 16px 48px}
-.grid{max-width:1200px;margin:0 auto;display:grid;gap:14px}
-.row{display:grid;grid-template-columns:1fr;gap:14px}
+
+/* ── LAYOUT ── */
+main{padding:12px 12px 72px}
+.grid{max-width:1200px;margin:0 auto;display:grid;gap:12px}
+.row{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:900px){.row.two{grid-template-columns:1.2fr .8fr}}
-.card{background:rgba(18,18,26,.92);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px}
-.card h2{margin:0 0 10px;font-size:15px;font-family:var(--brandFont);letter-spacing:1px;text-transform:uppercase;font-weight:700}
+.card{background:rgba(18,18,26,.92);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px}
+.card h2{margin:0 0 10px;font-size:14px;font-family:var(--brandFont);letter-spacing:1px;text-transform:uppercase;font-weight:700}
 .muted{color:var(--muted)}
-.sep{height:1px;background:var(--line);margin:14px 0}
-.btn{background:rgba(212,175,55,.18);border:1px solid rgba(212,175,55,.55);color:var(--text);padding:8px 14px;border-radius:12px;cursor:pointer;font-weight:700;font-family:var(--uiFont);font-size:13px;letter-spacing:.3px;transition:all .15s ease}
-.btn:hover{background:rgba(212,175,55,.28);border-color:rgba(212,175,55,.8)}
+.sep{height:1px;background:var(--line);margin:12px 0}
+
+/* ── BUTTONS ── */
+.btn{background:rgba(212,175,55,.18);border:1px solid rgba(212,175,55,.55);color:var(--text);padding:8px 14px;border-radius:12px;cursor:pointer;font-weight:700;font-family:var(--uiFont);font-size:13px;letter-spacing:.3px;transition:all .15s ease;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.btn:hover,.btn:active{background:rgba(212,175,55,.28);border-color:rgba(212,175,55,.8)}
 .btn.secondary{background:transparent;border-color:var(--line);color:var(--muted)}
-.btn.secondary:hover{border-color:rgba(212,175,55,.3);color:var(--text)}
+.btn.secondary:hover,.btn.secondary:active{border-color:rgba(212,175,55,.3);color:var(--text)}
 .btn.danger{background:rgba(255,90,106,.12);border-color:rgba(255,90,106,.35);color:var(--text)}
-.btn.danger:hover{background:rgba(255,90,106,.22)}
+.btn.danger:hover,.btn.danger:active{background:rgba(255,90,106,.22)}
 .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-input,select,textarea{width:100%;background:rgba(10,10,14,.6);border:1px solid var(--line);color:var(--text);padding:10px 12px;border-radius:12px;outline:none;font-family:var(--uiFont);font-size:13px;transition:border-color .15s}
+
+/* ── FORMS ── */
+input,select,textarea{width:100%;background:rgba(10,10,14,.6);border:1px solid var(--line);color:var(--text);padding:11px 12px;border-radius:12px;outline:none;font-family:var(--uiFont);font-size:16px;transition:border-color .15s}
+/* font-size:16px prevents iOS zoom on focus */
 input[type="date"],input[type="time"]{cursor:pointer;color-scheme:dark;}
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator{
@@ -59,37 +72,66 @@ input[type="time"]::-webkit-calendar-picker-indicator{
   cursor:pointer;opacity:.8;scale:1.2;
 }
 input:focus,select:focus,textarea:focus{border-color:rgba(212,175,55,.5)}
-textarea{min-height:80px;resize:vertical}
-label{font-size:11px;color:var(--muted);display:block;margin:10px 0 5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700}
+textarea{min-height:80px;resize:vertical;font-size:14px}
+label{font-size:11px;color:var(--muted);display:block;margin:10px 0 4px;letter-spacing:.5px;text-transform:uppercase;font-weight:700}
 .inline{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:520px){.inline{grid-template-columns:1fr}}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+@media(max-width:480px){.inline{grid-template-columns:1fr}}
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;display:flex;align-items:flex-end;justify-content:center;padding:0}
+@media(min-width:600px){.modal-overlay{align-items:center;padding:16px}}
+.modal-sheet{background:rgba(18,18,26,.98);border:1px solid var(--line);border-radius:20px 20px 0 0;width:100%;max-height:92vh;overflow-y:auto;padding:20px 16px;box-shadow:0 -20px 60px rgba(0,0,0,.5)}
+@media(min-width:600px){.modal-sheet{border-radius:20px;max-width:600px;max-height:88vh;padding:22px}}
+.modal-sheet.wide{max-width:1000px}
+.modal-handle{width:40px;height:4px;background:rgba(255,255,255,.2);border-radius:4px;margin:0 auto 18px}
+@media(min-width:600px){.modal-handle{display:none}}
+
+/* ── TABLES: card-style on mobile ── */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:640px){
+  .mobile-cards table,
+  .mobile-cards thead{display:none}
+  .mobile-cards .mobile-card-list{display:block}
+}
+@media(min-width:641px){
+  .mobile-cards .mobile-card-list{display:none}
+}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:0}
+th,td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
 th{color:var(--muted);font-weight:700;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+/* compact table on small screens */
+@media(max-width:640px){
+  th,td{padding:7px 6px;font-size:12px}
+}
+
+/* ── MISC ── */
 .mono{font-family:var(--mono)}
-.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--line);color:var(--muted);font-weight:700;font-size:11px;margin-right:5px;margin-top:5px}
+.chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:999px;background:var(--chip);border:1px solid var(--line);color:var(--muted);font-weight:700;font-size:11px;margin-right:4px;margin-top:4px;white-space:nowrap}
 .chip.gold{border-color:rgba(212,175,55,.4);color:var(--text);background:rgba(212,175,55,.12)}
 .chip.green{border-color:rgba(87,227,137,.4);color:#57e389;background:rgba(87,227,137,.08)}
 .chip.red{border-color:rgba(255,90,106,.4);color:#ff6b7a;background:rgba(255,90,106,.08)}
 .pill{font-family:var(--mono);padding:2px 7px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);font-size:12px}
 .notice{border-left:3px solid rgba(212,175,55,.55);background:rgba(212,175,55,.08);padding:10px 12px;border-radius:12px}
-.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.row-actions{display:flex;gap:5px;flex-wrap:wrap}
 .small{font-size:12px}
-/* tooltip */
+
+/* ── TOOLTIP ── */
 .tooltip-wrap{position:relative;display:inline-flex;align-items:center;}
-.tooltip-wrap .tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1e1e2e;border:1px solid var(--line);color:var(--text);font-size:12px;padding:8px 10px;border-radius:10px;white-space:nowrap;min-width:220px;max-width:300px;white-space:normal;z-index:999;display:none;box-shadow:var(--shadow);}
+.tooltip-wrap .tip{position:absolute;bottom:calc(100% + 8px);left:0;transform:none;background:#1e1e2e;border:1px solid var(--line);color:var(--text);font-size:12px;padding:8px 10px;border-radius:10px;min-width:220px;max-width:min(300px,90vw);white-space:normal;z-index:1000;display:none;box-shadow:var(--shadow);}
 .tooltip-wrap:hover .tip{display:block;}
-/* planner pitch */
+
+/* ── MATCHPLANNER PITCH ── */
 .slotGrid{display:grid;grid-template-columns:1fr;gap:10px}
 @media(min-width:900px){.slotGrid{grid-template-columns:1fr 1fr}}
-.pitch{border:1px solid rgba(212,175,55,.25);background:rgba(10,10,14,.35);border-radius:18px;padding:14px}
-.slot{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px dashed rgba(212,175,55,.35);border-radius:14px;padding:10px;margin:7px 0;background:rgba(212,175,55,.05)}
+.pitch{border:1px solid rgba(212,175,55,.25);background:rgba(10,10,14,.35);border-radius:16px;padding:12px}
+.slot{display:flex;align-items:center;justify-content:space-between;gap:8px;border:1px dashed rgba(212,175,55,.35);border-radius:12px;padding:9px;margin:6px 0;background:rgba(212,175,55,.05)}
 .slot strong{font-family:var(--brandFont);letter-spacing:.5px;font-size:14px}
 .draggable{border:1px solid var(--line);background:rgba(18,18,26,.92);border-radius:12px;padding:9px 10px;margin:6px 0;cursor:grab}
 .draggable:active{cursor:grabbing}
 .kv{display:flex;gap:6px;flex-wrap:wrap}
 .kv .chip{margin-top:0}
-/* taktiktafel */
+
+/* ── TAKTIKTAFEL ── */
 #tacticsField{width:100%;aspect-ratio:2/3;max-height:640px;background:#2d7a2d;
   border:3px solid rgba(255,255,255,.3);border-radius:12px;position:relative;overflow:hidden;cursor:crosshair;touch-action:none;}
 #pitchSvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
@@ -98,6 +140,16 @@ th{color:var(--muted);font-weight:700;font-size:11px;letter-spacing:.5px;text-tr
 .player-token:active{cursor:grabbing;z-index:20;box-shadow:0 0 0 3px var(--gold)}
 .player-token .tok-num{font-size:13px;font-weight:900;color:#fff;font-family:var(--brandFont);line-height:1}
 .player-token .tok-name{font-size:8px;color:rgba(255,255,255,.9);font-weight:700;margin-top:1px;line-height:1;white-space:nowrap;max-width:48px;overflow:hidden;text-overflow:ellipsis}
+
+/* ── MOBILE SPECIFIC ── */
+@media(max-width:480px){
+  .stat-grid{grid-template-columns:1fr 1fr!important}
+  .card{padding:12px}
+  .card h2{font-size:13px}
+  .btn{padding:9px 12px;font-size:12px}
+  main{padding:10px 10px 80px}
+  .wrap{padding:8px 12px}
+}
 </style></head>
 <body>
 <header><div class="wrap"><div class="topbar">
@@ -321,7 +373,7 @@ function renderDashboard(){
   const top=el(`<div class="row two">
     <div class="card">
       <h2>Coach Dashboard</h2>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px;" class="stat-grid">
         <div class="card" style="padding:12px;text-align:center;border-color:rgba(212,175,55,.3);">
           <div style="font-size:22px;font-weight:900;color:var(--gold);">${players.length}</div>
           <div class="muted small">Gesamt Spieler</div>
@@ -404,7 +456,7 @@ function renderSchedule(){
       </div>
     </div>
     <div class="sep"></div>
-    <div style="overflow:auto;" id="tableWrap">${renderScheduleTable()}</div>
+    <div class="table-wrap" id="tableWrap">${renderScheduleTable()}</div>
   </div>`);
   card.querySelector("#icsBtn").onclick=exportICS;
   card.querySelector("#addBtn").onclick=()=>openGameModal(null);
@@ -413,25 +465,42 @@ function renderSchedule(){
 function renderScheduleTable(){
   const list=[...(state.schedule||[])].sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
   if(!list.length) return `<p class="muted">Noch keine Spiele eingetragen.</p>`;
-  return `<table><thead><tr><th>Datum</th><th>Zeit</th><th>Gegner</th><th>H/A</th><th>Art</th><th>Ort</th><th>Ergebnis</th><th>Info</th><th>Aktionen</th></tr></thead><tbody>`+
-    list.map(g=>{
-      const typeChip=g.gameType==="Pokalspiel"?'<span class="chip green">🥇 Pokal</span>':g.gameType==="Testspiel"?'<span class="chip">🎯 Test</span>':'<span class="chip gold">🏆 Liga</span>';
-      const linked=(state.matches||[]).find(m=>m.scheduleId===g.id);
-      const resultBadge=linked?.score?`<span class="chip ${linked.score.split(":").map(Number)[0]>linked.score.split(":").map(Number)[1]?"green":linked.score.split(":").map(Number)[0]<linked.score.split(":").map(Number)[1]?"red":""}">${escapeHtml(linked.score)}</span>`:"<span class='muted small'>–</span>";
-      return `<tr>
-        <td class="mono">${g.date}</td><td class="mono">${g.time}</td>
-        <td><b>${escapeHtml(g.opponent)}</b></td>
-        <td>${g.home?'<span class="chip gold">H</span>':'<span class="chip">A</span>'}</td>
-        <td>${typeChip}</td>
-        <td>${escapeHtml(g.location||"")}</td>
-        <td>${resultBadge}</td>
-        <td class="muted small" style="max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(g.description||"")}</td>
-        <td><div class="row-actions">
-          <button class="btn secondary" onclick="editGame('${g.id}')" title="Bearbeiten">✏️</button>
-          <button class="btn secondary" onclick="addMatchFromGame('${g.id}')" title="Ergebnis eintragen">⚽</button>
-          <button class="btn danger" onclick="deleteGame('${g.id}')" title="Löschen">🗑</button>
-        </div></td></tr>`;
-    }).join("")+`</tbody></table>`;
+  function typeChip(g){return g.gameType==="Pokalspiel"?'<span class="chip green">🥇 Pokal</span>':g.gameType==="Testspiel"?'<span class="chip">🎯 Test</span>':'<span class="chip gold">🏆 Liga</span>';}
+  function result(g){
+    const linked=(state.matches||[]).find(m=>m.scheduleId===g.id);
+    return linked?.score?`<span class="chip ${linked.score.split(":").map(Number)[0]>linked.score.split(":").map(Number)[1]?"green":linked.score.split(":").map(Number)[0]<linked.score.split(":").map(Number)[1]?"red":""}">${escapeHtml(linked.score)}</span>`:"–";
+  }
+  function actions(g){return `<div class="row-actions">
+    <button class="btn secondary" onclick="editGame('${g.id}')" title="Bearbeiten">✏️</button>
+    <button class="btn secondary" onclick="addMatchFromGame('${g.id}')" title="Ergebnis eintragen">⚽</button>
+    <button class="btn danger" onclick="deleteGame('${g.id}')" title="Löschen">🗑</button>
+  </div>`;}
+  const tableHtml=`<table><thead><tr><th>Datum</th><th>Zeit</th><th>Gegner</th><th>H/A</th><th>Art</th><th>Ort</th><th>Ergebnis</th><th>Aktionen</th></tr></thead><tbody>`+
+    list.map(g=>`<tr>
+      <td class="mono" style="white-space:nowrap">${g.date}</td><td class="mono">${g.time}</td>
+      <td><b>${escapeHtml(g.opponent)}</b></td>
+      <td>${g.home?'<span class="chip gold">H</span>':'<span class="chip">A</span>'}</td>
+      <td>${typeChip(g)}</td>
+      <td style="white-space:nowrap">${escapeHtml(g.location||"")}</td>
+      <td>${result(g)}</td>
+      <td>${actions(g)}</td></tr>`).join("")+`</tbody></table>`;
+  const cardsHtml=`<div class="mobile-card-list">`+list.map(g=>`
+    <div style="border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px;background:rgba(18,18,26,.8);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <div style="font-weight:700;font-size:15px;">${escapeHtml(g.opponent)}</div>
+          <div class="muted small">${g.date} &nbsp;·&nbsp; ${g.time}</div>
+        </div>
+        <div style="text-align:right;">${typeChip(g)}${g.home?'<span class="chip gold">Heim</span>':'<span class="chip">Auswärts</span>'}</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
+        ${result(g)!=="–"?`<b style="font-size:16px;font-weight:900;">${result(g)}</b>`:""}
+        ${g.location?`<span class="muted small">📍 ${escapeHtml(g.location)}</span>`:""}
+        ${g.description?`<span class="muted small">${escapeHtml(g.description)}</span>`:""}
+      </div>
+      ${actions(g)}
+    </div>`).join("")+`</div>`;
+  return `<div class="mobile-cards">${tableHtml}${cardsHtml}</div>`;
 }
 function openGameModal(id){
   const existing=id ? state.schedule.find(x=>x.id===id) : null;
@@ -440,8 +509,9 @@ function openGameModal(id){
     opponent:"",home:true,location:"ASK Erlaa",description:"",gameType:"Ligaspiel"
   };
   if(!g.gameType) g.gameType="Ligaspiel";
-  const modal=el(`<div style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px;z-index:999;">
-    <div class="card" style="max-width:560px;width:100%;max-height:90vh;overflow-y:auto;">
+  const modal=el(`<div class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
       <div class="controls" style="justify-content:space-between;">
         <h2 style="margin:0;">${existing?"Spiel bearbeiten":"Neues Spiel"}</h2>
         <button class="btn secondary" id="close">Schließen</button>
@@ -538,24 +608,40 @@ function renderPlayers(){
       <button class="btn" id="add">+ Spieler</button>
     </div>
     <div class="sep"></div>
-    <div style="overflow:auto;" id="tbl">${renderPlayersTable()}</div>
+    <div class="table-wrap" id="tbl">${renderPlayersTable()}</div>
   </div>`);
   card.querySelector("#add").onclick=()=>openPlayerModal(null);
   root.appendChild(card);return root;
 }
 function renderPlayersTable(){
   const ps=[...(state.players||[])].sort((a,b)=>a.name.localeCompare(b.name));
-  return `<table><thead><tr><th>Name</th><th>#</th><th>Position</th><th>Status</th><th>Rolle</th><th>Aktion</th></tr></thead><tbody>`+
+  function roleChip(p){return p.squadRole==="Stammspieler"?'<span class="chip gold">⭐ Stamm</span>':p.squadRole==="Vereinsspieler"?'<span class="chip">🟡 Verein</span>':'<span class="chip">⚡ Gelegenheit</span>';}
+  const tableHtml=`<table><thead><tr><th>Name</th><th>#</th><th>Pos.</th><th>Rolle</th><th>Aktionen</th></tr></thead><tbody>`+
     ps.map(p=>`<tr>
-      <td><b>${escapeHtml(p.name)}</b><div class="muted small">${escapeHtml(p.nation||"")} · ${p.dob||""}</div></td>
+      <td><b>${escapeHtml(p.name)}</b><div class="muted small">${escapeHtml(p.nation||"")}${p.dob?" · "+p.dob:""}</div></td>
       <td class="mono">${p.number??""}</td>
       <td><span class="chip">${posLabel(p.position)}</span></td>
-      <td>${p.squadRole==="Stammspieler"?'<span class="chip gold">Stamm</span>':p.squadRole==="Vereinsspieler"?'<span class="chip">Verein</span>':'<span class="chip">Gelegenheit</span>'}</td>
-      <td>${escapeHtml(p.role||"")}</td>
+      <td>${roleChip(p)}</td>
       <td><div class="row-actions">
-        <button class="btn secondary" onclick="editPlayer('${p.id}')">✏️ Bearbeiten</button>
+        <button class="btn secondary" onclick="editPlayer('${p.id}')">✏️</button>
         <button class="btn danger" onclick="deletePlayer('${p.id}')">🗑</button>
       </div></td></tr>`).join("")+`</tbody></table>`;
+  const cardsHtml=`<div class="mobile-card-list">`+ps.map(p=>`
+    <div style="border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px;background:rgba(18,18,26,.8);display:flex;align-items:center;gap:12px;">
+      <div style="width:42px;height:42px;border-radius:50%;background:rgba(212,175,55,.15);border:1px solid rgba(212,175,55,.3);display:flex;align-items:center;justify-content:center;font-weight:900;font-family:var(--brandFont);font-size:16px;color:var(--gold);flex-shrink:0;">${p.number??""}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-weight:700;font-size:15px;">${escapeHtml(p.name)}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:3px;margin-top:3px;">
+          <span class="chip">${posLabel(p.position)}</span>${roleChip(p)}
+          ${p.nation?`<span class="muted small" style="margin-top:4px;">${escapeHtml(p.nation)}</span>`:""}
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0;">
+        <button class="btn secondary" onclick="editPlayer('${p.id}')" style="padding:7px 10px;">✏️</button>
+        <button class="btn danger" onclick="deletePlayer('${p.id}')" style="padding:7px 10px;">🗑</button>
+      </div>
+    </div>`).join("")+`</div>`;
+  return `<div class="mobile-cards">${tableHtml}${cardsHtml}</div>`;
 }
 function openPlayerModal(player){
   const isNew=!player;
@@ -563,8 +649,9 @@ function openPlayerModal(player){
     attrs:defaultAttrs("ZM"),history:[],createdAt:new Date().toISOString()}:structuredClone(player);
   const pos=normPos(p.position||"ZM");
   const attrsForPos=getAttrs(pos);
-  const modal=el(`<div style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px;z-index:999;overflow-y:auto;">
-    <div class="card" style="max-width:680px;width:100%;max-height:90vh;overflow-y:auto;">
+  const modal=el(`<div class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
       <div class="controls" style="justify-content:space-between;">
         <h2 style="margin:0;">${isNew?"Neuer Spieler":"Spieler bearbeiten"}</h2>
         <button class="btn secondary" id="close">Schließen</button>
@@ -652,7 +739,7 @@ function renderSessions(){
     <div class="sep"></div>
     <div class="notice">Standard-Anwesenheit: nur <b>Stammspieler</b> vorausgewählt.</div>
     <div class="sep"></div>
-    <div style="overflow:auto;">${renderSessionsTable()}</div>
+    <div class="table-wrap">${renderSessionsTable()}</div>
   </div>`);
   card.querySelector("#add").onclick=()=>openSessionModal(null);
   card.querySelector("#addThu").onclick=()=>openSessionModal({
@@ -666,10 +753,12 @@ function renderSessionsTable(){
   const ss=[...(state.sessions||[])].sort((a,b)=>(b.date||"").localeCompare(a.date||""));
   if(!ss.length) return `<p class="muted">Noch keine Einheiten erfasst.</p>`;
   const stamm=new Set(state.players.filter(p=>p.squadRole==="Stammspieler").map(p=>p.id));
-  return `<table><thead><tr><th>Datum</th><th>Dauer</th><th>Schwerpunkt</th><th>Belastung</th><th>Stamm</th><th>Aktion</th></tr></thead><tbody>`+
+  const tableHtml=`<table><thead><tr><th>Datum</th><th>Dauer</th><th>Schwerpunkt</th><th>RPE</th><th>Stamm</th><th>Aktionen</th></tr></thead><tbody>`+
     ss.map(s=>{
       const pres=(s.attendance||[]).filter(a=>stamm.has(a.playerId)&&a.present).length;
-      return `<tr><td class="mono">${s.date}</td><td class="mono">${s.minutes} min</td>
+      return `<tr>
+        <td class="mono" style="white-space:nowrap">${s.date}</td>
+        <td class="mono" style="white-space:nowrap">${s.minutes} min</td>
         <td>${(s.focus||[]).map(f=>`<span class="chip gold">${escapeHtml(f)}</span>`).join("")}</td>
         <td><span class="pill">${s.rpe}</span></td>
         <td class="mono">${pres}/${stamm.size}</td>
@@ -678,6 +767,24 @@ function renderSessionsTable(){
           <button class="btn danger" onclick="deleteSession('${s.id}')">🗑</button>
         </div></td></tr>`;
     }).join("")+`</tbody></table>`;
+  const cardsHtml=`<div class="mobile-card-list">`+ss.map(s=>{
+    const pres=(s.attendance||[]).filter(a=>stamm.has(a.playerId)&&a.present).length;
+    return `<div style="border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px;background:rgba(18,18,26,.8);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+        <div>
+          <div style="font-weight:700;font-size:14px;">📅 ${s.date}</div>
+          <div class="muted small">${s.minutes} min &nbsp;·&nbsp; 👥 ${pres}/${stamm.size} Stamm</div>
+        </div>
+        <span class="pill" style="font-size:14px;font-weight:900;">${s.rpe}/10</span>
+      </div>
+      <div style="margin-bottom:8px;">${(s.focus||[]).map(f=>`<span class="chip gold">${escapeHtml(f)}</span>`).join("")||'<span class="muted small">Kein Schwerpunkt</span>'}</div>
+      <div class="row-actions">
+        <button class="btn secondary" onclick="editSession('${s.id}')">✏️ Bearbeiten</button>
+        <button class="btn danger" onclick="deleteSession('${s.id}')">🗑</button>
+      </div>
+    </div>`;
+  }).join("")+`</div>`;
+  return `<div class="mobile-cards">${tableHtml}${cardsHtml}</div>`;
 }
 function openSessionModal(session){
   const all=state.players;
@@ -690,8 +797,8 @@ function openSessionModal(session){
   // Build all focus options - union of both attr sets
   const allAttrKeys=[...new Set([...ATTRS_FIELD.map(a=>a[0]),...ATTRS_GK.map(a=>a[0])])];
   const allAttrLabels=Object.fromEntries([...ATTRS_FIELD,...ATTRS_GK]);
-  const modal=el(`<div style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px;z-index:999;overflow-y:auto;">
-    <div class="card" style="max-width:900px;width:100%;max-height:90vh;overflow-y:auto;">
+  const modal=el(`<div class="modal-overlay">
+    <div class="modal-sheet wide">
       <div class="controls" style="justify-content:space-between;">
         <h2 style="margin:0;">${session?"Training bearbeiten":"Neue Trainingseinheit"}</h2>
         <button class="btn secondary" id="close">Schließen</button>
@@ -726,8 +833,8 @@ function openSessionModal(session){
           </select>
         </div>
       </div>
-      <label>Schwerpunkte (2–3 wählen)</label>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:6px;" id="focusBtns">
+      <label>Schwerpunkte (beliebig viele wählbar)</label>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;margin-top:6px;" id="focusBtns">
         ${allAttrKeys.map(k=>`<button type="button" class="tab ${s.focus.includes(k)?"active":""}" data-fk="${k}" style="border-radius:10px;text-align:left;font-size:12px;">${allAttrLabels[k]||k}</button>`).join("")}
       </div>
       <div class="sep"></div>
@@ -740,7 +847,7 @@ function openSessionModal(session){
         </div>
       </div>
       <div class="sep"></div>
-      <div style="max-height:280px;overflow:auto;">
+      <div style="max-height:280px;overflow-y:auto;overflow-x:auto;-webkit-overflow-scrolling:touch;">
         <table><thead><tr><th>Spieler</th><th>Position</th><th>Status</th><th>Anwesend</th></tr></thead><tbody>
         ${all.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(p=>{
           const a=(s.attendance||[]).find(x=>x.playerId===p.id)||{present:false};
@@ -767,7 +874,7 @@ function openSessionModal(session){
       const k=b.getAttribute("data-fk");
       const active=b.classList.contains("active");
       const cur=[...modal.querySelector("#focusBtns").querySelectorAll(".active")];
-      if(!active && cur.length>=3) return alert("Max. 3 Schwerpunkte.");
+      if(!active && cur.length>=3) return alert(" Schwerpunkte.");
       b.classList.toggle("active",!active);
     };
   });
@@ -794,7 +901,7 @@ function openSessionModal(session){
     s.minutes=parseInt(modal.querySelector("#min").value,10)||90;
     s.rpe=clamp(parseInt(modal.querySelector("#rpe").value,10)||6,1,10);
     s.notes=modal.querySelector("#notes").value.trim();
-    s.focus=[...modal.querySelector("#focusBtns").querySelectorAll(".active")].map(b=>b.getAttribute("data-fk")).slice(0,3);
+    s.focus=[...modal.querySelector("#focusBtns").querySelectorAll(".active")].map(b=>b.getAttribute("data-fk"));
     s.attendance=[];
     modal.querySelectorAll("[data-att]").forEach(sel=>{s.attendance.push({playerId:sel.getAttribute("data-att"),present:sel.value==="yes"});});
     const idx=state.sessions.findIndex(x=>x.id===s.id);const isEdit=idx>=0;
@@ -909,7 +1016,7 @@ function renderDevelopment(){
         <div id="chart"></div>
         <div class="sep"></div>
         <h2>Verlauf (letzte 20)</h2>
-        <div style="overflow:auto;" id="histTable"></div>
+        <div class="table-wrap" id="histTable"></div>
       </div>
     </div>
   </div>`);
@@ -1071,7 +1178,7 @@ function renderPlanner(){
         <textarea id="notes" placeholder="Taktische Hinweise…"></textarea>
         <div class="sep"></div>
         <h2>Matchday Checkliste <span style="font-size:11px;color:var(--muted);text-transform:none;font-weight:400;">(bearbeitbar)</span></h2>
-        <textarea id="check" style="min-height:150px;font-size:12px;line-height:1.7;font-family:var(--mono);"></textarea>
+        <textarea id="check" style="min-height:140px;font-size:13px;line-height:1.7;font-family:var(--mono);width:100%;"></textarea>
         <div style="margin-top:8px;display:flex;gap:8px;">
           <button class="btn secondary" id="copyCheck">📋 Kopieren</button>
           <button class="btn secondary" id="resetCheck">🔄 Zurücksetzen</button>
@@ -1079,7 +1186,7 @@ function renderPlanner(){
         <div class="sep"></div>
         <h2>Verfügbarkeit</h2>
         <div class="notice small" style="margin-bottom:8px;">Stamm=✅, Joker=⏳ (anpassbar)</div>
-        <div style="max-height:240px;overflow:auto;">
+        <div style="max-height:260px;overflow-y:auto;overflow-x:auto;-webkit-overflow-scrolling:touch;">
           <table><thead><tr><th>Spieler</th><th>Status</th><th>Verfügbar</th></tr></thead>
           <tbody id="availRows"></tbody></table>
         </div>
@@ -1501,7 +1608,7 @@ function renderMatches(){
     </div>
     <div class="sep"></div>
     ${pendingSection}
-    <div style="overflow:auto;" id="matchTable">${renderMatchesTable()}</div>
+    <div class="table-wrap" id="matchTable">${renderMatchesTable()}</div>
   </div>`);
   card.querySelector("#add").onclick=()=>openMatchModal(null);
   root.appendChild(card);return root;
@@ -1509,26 +1616,37 @@ function renderMatches(){
 function renderMatchesTable(){
   const ms=[...(state.matches||[])].sort((a,b)=>(b.date||"").localeCompare(a.date||""));
   if(!ms.length) return `<p class="muted">Noch keine Ergebnisse – klicke auf "+ Match eintragen" oder auf ⚽ im Spielplan.</p>`;
-  function scoreColor(s){
-    if(!s||!s.includes(":")) return "";
-    const[a,b]=s.split(":").map(Number);
-    return a>b?"color:#57e389;":a<b?"color:#ff6b7a;":"color:var(--muted);";
-  }
-  return `<table><thead><tr><th>Datum</th><th>Art</th><th>H/A</th><th>Gegner</th><th>Ergebnis</th><th>Notizen</th><th>Aktion</th></tr></thead><tbody>`+
-    ms.map(m=>{
-      const tc=m.gameType==="Pokalspiel"?'<span class="chip green">🥇 Pokal</span>':m.gameType==="Testspiel"?'<span class="chip">🎯 Test</span>':'<span class="chip gold">🏆 Liga</span>';
-      const ha=m.home!==false?'<span class="chip gold">H</span>':'<span class="chip">A</span>';
-      return `<tr>
-        <td class="mono">${m.date}</td>
-        <td>${tc}</td><td>${ha}</td>
-        <td><b>${escapeHtml(m.opponent||"-")}</b></td>
-        <td class="mono" style="font-weight:700;${scoreColor(m.score)}">${escapeHtml(m.score||"–")}</td>
-        <td class="muted small">${escapeHtml(m.notes||"")}</td>
-        <td><div class="row-actions">
-          <button class="btn secondary" onclick="editMatch('${m.id}')">✏️</button>
-          <button class="btn danger" onclick="deleteMatch('${m.id}')">🗑</button>
-        </div></td></tr>`;
-    }).join("")+`</tbody></table>`;
+  function scoreColor(s){if(!s||!s.includes(":"))return "";const[a,b]=s.split(":").map(Number);return a>b?"#57e389":a<b?"#ff6b7a":"var(--muted)";}
+  function typeChip(m){return m.gameType==="Pokalspiel"?'<span class="chip green">🥇 Pokal</span>':m.gameType==="Testspiel"?'<span class="chip">🎯 Test</span>':'<span class="chip gold">🏆 Liga</span>';}
+  function haChip(m){return m.home!==false?'<span class="chip gold">Heim</span>':'<span class="chip">Auswärts</span>';}
+  const tableHtml=`<table><thead><tr><th>Datum</th><th>Art</th><th>Gegner</th><th>Ergebnis</th><th>Notizen</th><th>Aktionen</th></tr></thead><tbody>`+
+    ms.map(m=>`<tr>
+      <td class="mono" style="white-space:nowrap">${m.date}</td>
+      <td>${typeChip(m)}</td>
+      <td><b>${escapeHtml(m.opponent||"-")}</b><br><small>${m.home!==false?"🏠 Heim":"✈️ Auswärts"}</small></td>
+      <td class="mono" style="font-weight:900;color:${scoreColor(m.score)};white-space:nowrap">${escapeHtml(m.score||"–")}</td>
+      <td class="muted small">${escapeHtml(m.notes||"")}</td>
+      <td><div class="row-actions">
+        <button class="btn secondary" onclick="editMatch('${m.id}')">✏️</button>
+        <button class="btn danger" onclick="deleteMatch('${m.id}')">🗑</button>
+      </div></td></tr>`).join("")+`</tbody></table>`;
+  const cardsHtml=`<div class="mobile-card-list">`+ms.map(m=>`
+    <div style="border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px;background:rgba(18,18,26,.8);">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+        <div>
+          <div style="font-weight:700;font-size:15px;">${escapeHtml(m.opponent||"-")}</div>
+          <div class="muted small">${m.date}</div>
+        </div>
+        <div style="font-size:22px;font-weight:900;color:${scoreColor(m.score)};">${escapeHtml(m.score||"–")}</div>
+      </div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;">${typeChip(m)}${haChip(m)}</div>
+      ${m.notes?`<div class="muted small" style="margin-bottom:8px;">${escapeHtml(m.notes)}</div>`:""}
+      <div class="row-actions">
+        <button class="btn secondary" onclick="editMatch('${m.id}')">✏️ Bearbeiten</button>
+        <button class="btn danger" onclick="deleteMatch('${m.id}')">🗑</button>
+      </div>
+    </div>`).join("")+`</div>`;
+  return `<div class="mobile-cards">${tableHtml}${cardsHtml}</div>`;
 }
 function openMatchModal(match){
   const isNew=!match;
@@ -1540,8 +1658,8 @@ function openMatchModal(match){
   }:structuredClone(match);
   if(m.home===undefined) m.home=true;
   if(!m.gameType) m.gameType="Ligaspiel";
-  const modal=el(`<div style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px;z-index:999;overflow-y:auto;">
-    <div class="card" style="max-width:1000px;width:100%;max-height:90vh;overflow-y:auto;">
+  const modal=el(`<div class="modal-overlay">
+    <div class="modal-sheet wide">
       <div class="controls" style="justify-content:space-between;">
         <h2 style="margin:0;">${isNew?"Neues Match":"Match bearbeiten"}</h2>
         <button class="btn secondary" id="close">Schließen</button>
@@ -1579,7 +1697,7 @@ function openMatchModal(match){
         </div>
       </div>
       <div class="sep"></div>
-      <div style="overflow:auto;">
+      <div class="table-wrap">
         <table><thead><tr><th>Spieler</th><th>Pos</th><th>Status</th><th>Verfügbar</th><th>Min</th><th>T</th><th>V</th><th>Note</th><th>Gelb</th><th>Rot</th><th>Feedback</th></tr></thead><tbody>
         ${state.players.slice().sort((a,b)=>a.name.localeCompare(b.name)).map(p=>{
           const s=(m.stats||[]).find(x=>x.playerId===p.id)||{available:false,minutes:0,goals:0,assists:0,rating:6,yellow:0,red:0,feedback:""};
@@ -1977,8 +2095,8 @@ function renderLibrary(){
   function openDrillModal(drill){
     const isNew=!drill;
     const d=isNew?{id:uid(),title:"",tags:[],equip:"",setup:"",steps:[""],coaching:[""]}:structuredClone(drill);
-    const modal=el(`<div style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px;z-index:999;overflow-y:auto;">
-      <div class="card" style="max-width:600px;width:100%;max-height:90vh;overflow-y:auto;">
+    const modal=el(`<div class="modal-overlay">
+      <div class="modal-sheet">
         <div class="controls" style="justify-content:space-between;">
           <h2 style="margin:0;">${isNew?"Neue Übung":"Übung bearbeiten"}</h2>
           <button class="btn secondary" id="close">Schließen</button>
@@ -2046,8 +2164,8 @@ function renderLibrary(){
     const name=prompt("Name des Trainingsplans:");if(!name) return;
     const available=(state.library||[]);
     const chosen=[];
-    const modal=el(`<div style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px;z-index:999;overflow-y:auto;">
-      <div class="card" style="max-width:500px;width:100%;max-height:90vh;overflow-y:auto;">
+    const modal=el(`<div class="modal-overlay">
+      <div class="modal-sheet">
         <div class="controls" style="justify-content:space-between;">
           <h2 style="margin:0;">Übungen auswählen</h2>
           <button class="btn secondary" id="close">Schließen</button>
